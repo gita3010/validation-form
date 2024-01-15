@@ -1,0 +1,201 @@
+// Variables for light theme
+$light-bg-color: #f0f0f0;
+$light-text-color: #333;
+$light-input-bg-color: #fff;
+$light-input-border-color: #ccc;
+$light-input-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+$light-icon-color: #333;
+
+// Variables for dark theme
+$dark-bg-color: #333;
+$dark-text-color: #fff;
+$dark-input-bg-color: #444;
+$dark-input-border-color: #555;
+$dark-input-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+$dark-icon-color: #fff;
+
+@mixin input-field-style {
+    background-color: $light-input-bg-color;
+    border: 1px solid $light-input-border-color;
+    box-shadow: $light-input-shadow;
+    color: $light-text-color;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    &:focus {
+      outline: none;
+      border-color: $dark-input-border-color;
+      box-shadow: 0 0 5px 2px $dark-input-border-color;
+    }
+  
+    &.dark-theme {
+      background-color: $dark-input-bg-color;
+      border-color: $dark-input-border-color;
+      box-shadow: $dark-input-shadow;
+      color: $dark-text-color;
+  
+      &:focus {
+        box-shadow: 0 0 5px 2px $dark-input-border-color;
+      }
+    }
+  }
+
+// Light Theme
+body {
+  background-color: $light-bg-color;
+  color: $light-text-color;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  &.dark-theme {
+    background-color: $dark-bg-color;
+    color: $dark-text-color;
+  }
+}
+
+.container {
+  width: 400px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: $light-input-bg-color;
+  box-shadow: $light-input-shadow;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+border-radius: 10px;
+  &.dark-theme {
+    background-color: $dark-input-bg-color;
+    box-shadow: $dark-input-shadow;
+  }
+
+  .formBody {
+    form {
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+        @include input-field-style;
+      }
+
+      input[type="submit"] {
+        background-color: rgb(84, 84, 175);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 8px;
+
+        &:hover {
+          background-color: darkcyan;
+          color: white;
+        }
+
+        &.dark-theme {
+          background-color: $dark-input-bg-color;
+          color: $dark-text-color;
+
+          &:hover {
+            background-color: darken($dark-input-bg-color, 10%);
+            color: $dark-text-color;
+          }
+        }
+      }
+    }
+
+    &.dark-theme {
+      form {
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+          @include input-field-style;
+        }
+      }
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          transition: 0.4s;
+
+          &::before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: #fff;
+            transition: 0.4s;
+            border-radius: 34px;
+          }
+        }
+
+        .round {
+          border-radius: 34px;
+        }
+
+        input[type="checkbox"] {
+          opacity: 0;
+          width: 0;
+          height: 0;
+
+          &:checked + .slider {
+            background-color: #2196f3;
+          }
+
+          &:checked + .slider::before {
+            transform: translateX(26px);
+          }
+        }
+      }
+
+      .github-button {
+        color: $light-icon-color;
+        font-size: 1.5rem;
+        &:hover {
+          color: #2196f3;
+        }
+
+        &.dark-theme {
+          color: white;
+          &:hover {
+            color: #2196f3;
+          }
+        }
+      }
+    }
+  }
+}
